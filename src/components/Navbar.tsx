@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { format } from "date-fns";
-import { Apple, BarChart2, PlusCircle, Settings } from "lucide-react";
+import { ptBR } from "date-fns/locale";
+import { Apple, BarChart2, PlusCircle, Settings, Code2  } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
@@ -30,7 +31,7 @@ const Navbar = () => {
               end
             >
               <BarChart2 className="h-6 w-6 mb-1" />
-              <span className="text-xs">Dashboard</span>
+              <span className="text-xs">Inicio</span>
             </NavLink>
 
             <NavLink
@@ -43,7 +44,7 @@ const Navbar = () => {
               }
             >
               <PlusCircle className="h-6 w-6 mb-1" />
-              <span className="text-xs">Add Food</span>
+              <span className="text-xs">Add Alimento</span>
             </NavLink>
 
             <NavLink
@@ -56,7 +57,7 @@ const Navbar = () => {
               }
             >
               <Apple className="h-6 w-6 mb-1" />
-              <span className="text-xs">Food Log</span>
+              <span className="text-xs">Refeições</span>
             </NavLink>
 
             <NavLink
@@ -69,13 +70,27 @@ const Navbar = () => {
               }
             >
               <Settings className="h-6 w-6 mb-1" />
-              <span className="text-xs">Settings</span>
+              <span className="text-xs">Configurações</span>
+            </NavLink>
+
+
+            <NavLink
+              to="/developer"
+              className={({ isActive }) =>
+                cn(
+                  "flex flex-col items-center p-2 text-gray-600 hover:text-green-600 transition-colors",
+                  isActive && "text-green-600 font-medium"
+                )
+              }
+            >
+              <Code2  className="h-6 w-6 mb-1" />
+              <span className="text-xs">Developer</span>
             </NavLink>
           </div>
 
           <div className="md:flex items-center gap-2 hidden">
             <span className="text-sm text-gray-500">
-              {format(new Date(), "EEEE, MMM d")}
+              {format(new Date(), "EEEE, d 'de' MMMM", { locale: ptBR })}
             </span>
           </div>
         </div>

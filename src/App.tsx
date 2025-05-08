@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import AddFood from "./pages/AddFood";
 import FoodLog from "./pages/FoodLog";
 import Settings from "./pages/Settings";
+import Developer from "./pages/Developer";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/add-food" element={<AddFood />} />
           <Route path="/food-log" element={<FoodLog />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/developer" element={<Developer />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
