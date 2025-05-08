@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { FoodEntry, DailyGoals, User, MealType } from '@/types';
 import { toast } from '@/components/ui/use-toast';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 
 interface CalorieContextProps {
   foodEntries: FoodEntry[];
@@ -37,11 +37,11 @@ export const CalorieProvider = ({ children }: { children: ReactNode }) => {
   const [foodEntries, setFoodEntries] = useState<FoodEntry[]>([]);
   const [user, setUser] = useState<User>(defaultUser);
 
-  // Carregar dados do Storage quando o app inicia
+  // Carregar dados do Preferences quando o app inicia
   useEffect(() => {
     const loadData = async () => {
-      const { value: savedEntries } = await Storage.get({ key: 'foodEntries' });
-      const { value: savedUser } = await Storage.get({ key: 'user' });
+      const { value: savedEntries } = await Preferences.get({ key: 'foodEntries' });
+      const { value: savedUser } = await Preferences.get({ key: 'user' });
 
       if (savedEntries) {
         setFoodEntries(JSON.parse(savedEntries));
@@ -57,7 +57,7 @@ export const CalorieProvider = ({ children }: { children: ReactNode }) => {
   // Salvar foodEntries sempre que mudam
   useEffect(() => {
     const saveFoodEntries = async () => {
-      await Storage.set({
+      await Preferences.set({
         key: 'foodEntries',
         value: JSON.stringify(foodEntries),
       });
@@ -68,7 +68,7 @@ export const CalorieProvider = ({ children }: { children: ReactNode }) => {
   // Salvar user sempre que muda
   useEffect(() => {
     const saveUser = async () => {
-      await Storage.set({
+      await Preferences.set({
         key: 'user',
         value: JSON.stringify(user),
       });
@@ -132,7 +132,7 @@ export const CalorieProvider = ({ children }: { children: ReactNode }) => {
     return getDailyEntries(date).reduce((total, entry) => total + entry.calories, 0);
   };
 
-  // Calcular total por tipo de refeição (ex: café da manhã) para uma data
+  // Calcular total por tipo de refeição para uma data
   const getTotalByMealType = (date: string, mealType: MealType) => {
     return getDailyEntries(date)
       .filter((entry) => entry.mealType === mealType)

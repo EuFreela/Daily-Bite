@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">calorias</string>
+    <string name="title_activity_main">calorias</string>
+    <string name="package_name">com.lameck.app</string>
+    <string name="custom_url_scheme">com.lameck.app</string>
+</resources>

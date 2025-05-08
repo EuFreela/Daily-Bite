@@ -1,11 +1,9 @@
 import { NavLink } from "react-router-dom";
-import { useCalories } from "@/context/CalorieContext";
 import { format } from "date-fns";
 import { Apple, BarChart2, PlusCircle, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
-  const { user } = useCalories();
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-background border-t border-border shadow-lg py-2 px-4 md:top-0 md:bottom-auto z-50">
