@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { FoodEntry, DailyGoals, User, MealType } from '@/types';
 import { toast } from '@/components/ui/use-toast';
+import { Storage } from '@capacitor/storage';
 
 interface CalorieContextProps {
   foodEntries: FoodEntry[];
@@ -16,14 +17,14 @@ interface CalorieContextProps {
 
 const CalorieContext = createContext<CalorieContextProps | undefined>(undefined);
 
-// Generate unique ID
+// Gerar ID único
 const generateId = (): string => {
   return Date.now().toString(36) + Math.random().toString(36).substring(2, 9);
 };
 
-// Default user settings
+// Configuração padrão do usuário
 const defaultUser: User = {
-  name: 'User',
+  name: 'Usuário',
   dailyGoals: {
     calories: 2000,
     protein: 75,
@@ -36,86 +37,102 @@ export const CalorieProvider = ({ children }: { children: ReactNode }) => {
   const [foodEntries, setFoodEntries] = useState<FoodEntry[]>([]);
   const [user, setUser] = useState<User>(defaultUser);
 
-  // Load data from localStorage on component mount
+  // Carregar dados do Storage quando o app inicia
   useEffect(() => {
-    const savedEntries = localStorage.getItem('foodEntries');
-    const savedUser = localStorage.getItem('user');
-    
-    if (savedEntries) {
-      setFoodEntries(JSON.parse(savedEntries));
-    }
-    
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
+    const loadData = async () => {
+      const { value: savedEntries } = await Storage.get({ key: 'foodEntries' });
+      const { value: savedUser } = await Storage.get({ key: 'user' });
+
+      if (savedEntries) {
+        setFoodEntries(JSON.parse(savedEntries));
+      }
+      if (savedUser) {
+        setUser(JSON.parse(savedUser));
+      }
+    };
+
+    loadData();
   }, []);
 
-  // Save data to localStorage when state changes
+  // Salvar foodEntries sempre que mudam
   useEffect(() => {
-    localStorage.setItem('foodEntries', JSON.stringify(foodEntries));
+    const saveFoodEntries = async () => {
+      await Storage.set({
+        key: 'foodEntries',
+        value: JSON.stringify(foodEntries),
+      });
+    };
+    saveFoodEntries();
   }, [foodEntries]);
 
+  // Salvar user sempre que muda
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user));
+    const saveUser = async () => {
+      await Storage.set({
+        key: 'user',
+        value: JSON.stringify(user),
+      });
+    };
+    saveUser();
   }, [user]);
 
-  // Add a new food entry
+  // Adicionar uma nova refeição
   const addFoodEntry = (entry: Omit<FoodEntry, 'id'>) => {
     const newEntry = {
       ...entry,
       id: generateId(),
     };
-    setFoodEntries([...foodEntries, newEntry]);
+    setFoodEntries((prev) => [...prev, newEntry]);
     toast({
-      title: "Food added",
-      description: `${entry.name} (${entry.calories} calories) has been added to your log.`,
+      title: "Refeição adicionada",
+      description: `${entry.name} (${entry.calories} calorias) foi adicionada ao seu diário.`,
     });
   };
 
-  // Remove a food entry
+  // Remover uma refeição
   const removeFoodEntry = (id: string) => {
-    setFoodEntries(foodEntries.filter((entry) => entry.id !== id));
+    setFoodEntries((prev) => prev.filter((entry) => entry.id !== id));
     toast({
-      title: "Entry removed",
-      description: "The food entry has been removed from your log.",
+      title: "Refeição removida",
+      description: "A refeição foi removida do seu diário.",
     });
   };
 
-  // Update user daily goals
+  // Atualizar metas diárias
   const updateUserGoals = (goals: DailyGoals) => {
-    setUser({
-      ...user,
+    setUser((prev) => ({
+      ...prev,
       dailyGoals: goals,
-    });
+    }));
     toast({
-      title: "Goals updated",
-      description: "Your daily nutritional goals have been updated.",
+      title: "Metas atualizadas",
+      description: "Suas metas nutricionais diárias foram atualizadas.",
     });
   };
 
-  // Update user name
+  // Atualizar nome do usuário
   const updateUserName = (name: string) => {
-    setUser({
-      ...user,
+    setUser((prev) => ({
+      ...prev,
       name,
-    });
+    }));
     toast({
-      title: "Profile updated",
-      description: `Your name has been changed to ${name}.`,
+      title: "Perfil atualizado",
+      description: `Seu nome foi alterado para ${name}.`,
     });
   };
 
-  // Get entries for a specific date
+  // Obter refeições de uma data específica
   const getDailyEntries = (date: string) => {
     return foodEntries.filter((entry) => entry.date === date);
   };
 
-  // Calculate total calories for a specific date
+  // Calcular total de calorias de uma data
   const getTotalCaloriesByDate = (date: string) => {
     return getDailyEntries(date).reduce((total, entry) => total + entry.calories, 0);
   };
 
-  // Calculate total calories by meal type for a specific date
+  // Calcular total por tipo de refeição (ex: café da manhã) para uma data
   const getTotalByMealType = (date: string, mealType: MealType) => {
     return getDailyEntries(date)
       .filter((entry) => entry.mealType === mealType)
@@ -144,7 +161,7 @@ export const CalorieProvider = ({ children }: { children: ReactNode }) => {
 export const useCalories = (): CalorieContextProps => {
   const context = useContext(CalorieContext);
   if (context === undefined) {
-    throw new Error('useCalories must be used within a CalorieProvider');
+    throw new Error('useCalories precisa ser usado dentro de um CalorieProvider');
   }
   return context;
 };
