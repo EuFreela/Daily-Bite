@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { Apple, BarChart2, PlusCircle, Settings, Code2  } from "lucide-react";
+import { Apple, BarChart2, PlusCircle, Settings, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
@@ -44,7 +44,7 @@ const Navbar = () => {
               }
             >
               <PlusCircle className="h-6 w-6 mb-1" />
-              <span className="text-xs">Add Alimento</span>
+              <span className="text-xs">Alimento</span>
             </NavLink>
 
             <NavLink
@@ -83,8 +83,8 @@ const Navbar = () => {
                 )
               }
             >
-              <Code2  className="h-6 w-6 mb-1" />
-              <span className="text-xs">Developer</span>
+              <Heart className="h-6 w-6 mb-1 text-red-500" />
+              <span className="text-xs text-red-500">Dev</span>
             </NavLink>
           </div>
 
