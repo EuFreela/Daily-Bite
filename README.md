@@ -50,8 +50,12 @@ npx cap open android
 
 Abra o projeto no Android Studio para executar no emulador ou dispositivo para usar o _apk_
 
+![android](https://i.postimg.cc/RhMwQxmZ/Captura-de-tela-2025-05-08-215756.png)
+
 ## 📲 Executar na Web
 
 ```bash
 npm run dev
 ```
+
+![web](https://i.postimg.cc/xjRvj8GJ/Captura-de-tela-2025-05-08-215842.png)
