@@ -2,6 +2,8 @@
 
 **Daily Bite** é um app desenvolvido com **React + TypeScript + TailwindCSS + Capacitor**, com uma estrutura moderna e diversos componentes de interface baseados na biblioteca **Radix UI**.
 
+O aplicativo tem como finalidade ajudar o usuário a registrar e acompanhar suas refeições diárias, calculando calorias, proteínas, carboidratos e gorduras consumidas, além de exibir progresso visual em relação às metas diárias.
+
 ## 🚀 Setup Rápido
 
 ```bash
