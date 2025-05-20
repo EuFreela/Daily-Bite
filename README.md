@@ -4,6 +4,8 @@
 
 O aplicativo tem como finalidade ajudar o usuário a registrar e acompanhar suas refeições diárias, calculando calorias, proteínas, carboidratos e gorduras consumidas, além de exibir progresso visual em relação às metas diárias.
 
+O sistema desenvolvido foi implementado como um Progressive Web App (PWA), garantindo acessibilidade multiplataforma com performance otimizada.
+
 ## 🚀 Setup Rápido
 
 ```bash
