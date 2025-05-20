@@ -6,6 +6,8 @@ O aplicativo tem como finalidade ajudar o usuário a registrar e acompanhar suas
 
 O sistema desenvolvido foi implementado como um Progressive Web App (PWA), garantindo acessibilidade multiplataforma com performance otimizada.
 
+**Obs: Estarei fazendo alguns aplicativos para amigos ajudando em seus empreendimentos e poderei disponibilizar aqui para atualização do meu portifólio - percebo que faltou alguns Apps. Não tenho uma iOS para o build dos instaladores e não há necessidade de pagar para isso. Por este motivo disponibilizarei apenas para android. Não estarei, pelo menos por enquanto, disponibilizando os apps na Google Play devido a burocracia, mas, estarei disponibilizando em outras plataformas. Contudo o apk tb esta no repositório.**
+
 ## Build de instalação
 
 ```bash
