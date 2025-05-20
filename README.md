@@ -6,6 +6,12 @@ O aplicativo tem como finalidade ajudar o usuário a registrar e acompanhar suas
 
 O sistema desenvolvido foi implementado como um Progressive Web App (PWA), garantindo acessibilidade multiplataforma com performance otimizada.
 
+## Build de instalação
+
+```bash
+android\app\build\outputs\apk\release\dailybite.apk
+```
+
 ## 🚀 Setup Rápido
 
 ```bash
