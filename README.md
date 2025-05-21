@@ -9,6 +9,10 @@ O sistema desenvolvido foi implementado como um Progressive Web App (PWA), garan
 **Obs: Tenho desenvolvido alguns aplicativos para amigos que estão empreendendo, e aproveitarei para compartilhá-los aqui como parte da atualização do meu portfólio.
 Notei que ainda faltam alguns apps por aqui — estou organizando isso aos poucos. No momento, os builds estão disponíveis apenas para Android, pois não possuo um dispositivo Apple para gerar versões iOS e também não há necessidade de arcar com os custos da App Store neste estágio. Além disso, a publicação na Google Play está suspensa temporariamente devido à burocracia envolvida. Mas fique tranquilo(a), os arquivos APK estarão disponíveis em outras plataformas e também aqui no repositório, para quem quiser baixar e testar. Caso tenha interesse posso desenvolver como freelancer alguma solução em software para você - teria que entrar em contato. Obrigado**
 
+## Publicado em:
+
+[Daily Bite na APKPure](https://apkpure.com/p/com.lameck.app)
+
 ## Build de instalação
 
 ```bash
